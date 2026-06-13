@@ -1,9 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const dotenv = require("dotenv");
 const path = require("path");
-
-dotenv.config({ path: path.join(__dirname, ".env") });
 
 const {
   WorkerManager,
@@ -573,7 +570,7 @@ app.post("/api/list-lab-workers", ensureUserId, async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 6060;
+const PORT = 6060;
 app.listen(PORT, () => {
   console.log(`\n${"=".repeat(60)}`);
   console.log(`🚀 Worker Management Server Running`);
