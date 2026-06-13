@@ -570,8 +570,9 @@ app.post("/api/list-lab-workers", ensureUserId, async (req, res) => {
   }
 });
 
+
 const PORT = 6060;
-app.listen(PORT, () => {
+app.listen(PORT,'0.0.0.0', () => {
   console.log(`\n${"=".repeat(60)}`);
   console.log(`🚀 Worker Management Server Running`);
   console.log(`${"=".repeat(60)}`);
