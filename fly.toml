@@ -1,10 +1,10 @@
-# fly.toml app configuration file generated for cloudflaredserver-n7--2q on 2026-06-13T23:23:30Z
+# fly.toml app configuration file generated for cloudflaredserver on 2026-06-13T23:31:24Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'cloudflaredserver-n7--2q'
-primary_region = 'iad'
+app = 'cloudflaredserver'
+primary_region = 'ams'
 
 [build]
 
@@ -16,7 +16,7 @@ primary_region = 'iad'
   auto_extend_size_limit = '10GB'
 
 [http_service]
-  internal_port = 8080
+  internal_port = 6060
   force_https = true
   auto_stop_machines = 'stop'
   auto_start_machines = true
