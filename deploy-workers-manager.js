@@ -319,33 +319,33 @@ function getDb(dbPath) {
 
 // d1-credentials.js
 export async function saveCredentials(userId, apiToken, accountId, manageApiToken) {
-  const { env } = getRequestContext();
-  await env.DB.prepare(`
-    CREATE TABLE IF NOT EXISTS user_cloudflare (
-      user_id TEXT PRIMARY KEY,
-      api_token TEXT,
-      account_id TEXT,
-      manage_api_token TEXT,
-      updated_at INTEGER
-    )
-  `).run();
+  // const { env } = getRequestContext();
+  // await env.DB.prepare(`
+  //   CREATE TABLE IF NOT EXISTS user_cloudflare (
+  //     user_id TEXT PRIMARY KEY,
+  //     api_token TEXT,
+  //     account_id TEXT,
+  //     manage_api_token TEXT,
+  //     updated_at INTEGER
+  //   )
+  // `).run();
   
-  await env.DB.prepare(`
-    INSERT OR REPLACE INTO user_cloudflare (user_id, api_token, account_id, manage_api_token, updated_at)
-    VALUES (?, ?, ?, ?, ?)
-  `).bind(userId, apiToken, accountId, manageApiToken, Date.now()).run();
+  // await env.DB.prepare(`
+  //   INSERT OR REPLACE INTO user_cloudflare (user_id, api_token, account_id, manage_api_token, updated_at)
+  //   VALUES (?, ?, ?, ?, ?)
+  // `).bind(userId, apiToken, accountId, manageApiToken, Date.now()).run();
 }
 
 function getCredentials(db, userId) {
-  const row = db
-    .prepare("SELECT api_token, account_id, manage_api_token FROM user_cloudflare WHERE user_id = ?")
-    .get(userId);
-  if (!row) return null;
-  return {
-    apiToken: row.api_token,
-    accountId: row.account_id,
-    manageApiToken: row.manage_api_token || null,
-  };
+  // const row = db
+  //   .prepare("SELECT api_token, account_id, manage_api_token FROM user_cloudflare WHERE user_id = ?")
+  //   .get(userId);
+  // if (!row) return null;
+  // return {
+  //   apiToken: row.api_token,
+  //   accountId: row.account_id,
+  //   manageApiToken: row.manage_api_token || null,
+  // };
 }
 
 function deleteCredentials(db, userId) {
