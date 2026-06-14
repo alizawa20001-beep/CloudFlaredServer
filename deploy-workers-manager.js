@@ -317,10 +317,23 @@ function getDb(dbPath) {
   return db;
 }
 
-function saveCredentials(db, userId, apiToken, accountId, manageApiToken) {
-  db.prepare(
-    "INSERT OR REPLACE INTO user_cloudflare (user_id, api_token, account_id, manage_api_token) VALUES (?, ?, ?, ?)"
-  ).run(userId, apiToken, accountId, manageApiToken || null);
+// d1-credentials.js
+export async function saveCredentials(userId, apiToken, accountId, manageApiToken) {
+  const { env } = getRequestContext();
+  await env.DB.prepare(`
+    CREATE TABLE IF NOT EXISTS user_cloudflare (
+      user_id TEXT PRIMARY KEY,
+      api_token TEXT,
+      account_id TEXT,
+      manage_api_token TEXT,
+      updated_at INTEGER
+    )
+  `).run();
+  
+  await env.DB.prepare(`
+    INSERT OR REPLACE INTO user_cloudflare (user_id, api_token, account_id, manage_api_token, updated_at)
+    VALUES (?, ?, ?, ?, ?)
+  `).bind(userId, apiToken, accountId, manageApiToken, Date.now()).run();
 }
 
 function getCredentials(db, userId) {
